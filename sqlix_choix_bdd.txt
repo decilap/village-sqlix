@@ -1,0 +1,12 @@
+Projet Le village d'SQLix
+
+
+L'équipe a fait le choix du moteur relationnel MySQL, parce que le projet << Le village d'SQLix >> organise ces données sur le principe de tables reliées entre elles. (Clé primaire,  Clé étrangère et transaction)
+Les types des données sont rigides, c’est-à-dire fixés à l’avance avant d’implémenter une logique métier.
+Les tables SQL du projet imposent un modèle de données strictes, pour éviter de faire des erreurs. 
+
+NoSQL stocke et manipule des documents qui correspondent à des collections d’objets.
+Dans une base de données NoSQL, la logique est toute autre !
+Les données peuvent être ajoutées n’importe où, à tout moment. Il n’est pas nécessaire de spécifier une conception de document ou même une collection à l’avance donc ce choix n’est pas approprié pour le développement de ce projet. 😉
+
+
