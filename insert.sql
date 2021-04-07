@@ -6,7 +6,7 @@ VALUES
 (3,"Barde"),
 (4,"Guerrier"),
 (5,"Chasseur"),
-(6,"Livreurs de menhirs"),
+(6,"6 Livreur de menhirs"),
 (7,"Facteur"),
 (8,"Poissonnière"),
 (9,"Serveuse");
@@ -16,7 +16,7 @@ INSERT INTO province (num_province, nom_province, nom_gouverneur)
 VALUES 
 (1,"Armorique","Garovirus"),
 (2,"Averne","Nenpeuplus"),
-(3,"Aquitaine","Yenaplus");
+(3,"Aquitaine","Yenapus");
 
 -- INSERT TABLE VILLAGE
 INSERT INTO village (num_village, nom_village, nb_huttes, num_province)
@@ -24,19 +24,19 @@ VALUES
 (1,"Aquilona",52,1),
 (2,"Lutèce",25,2),
 (3,"Aginum",33,3),
-(4,"Calendes Aqua",42,2),
+(4,"Calendes Aquae",42,2),
 (5,"Condate",38,1),
 (6,"Gergovie",55,3),
 (7,"Aquae Calidae",35,2);
 
 -- INSERT TABLE HABITANT
-INSERT INTO habitant (num_habitant, nom,age,num_qualite,num_village)
+INSERT INTO habitant (num_hab, nom,age,num_qualite,num_village)
 VALUES 
 (1,"Abraracourcix",65,1,1),
 (2,"Amnésix",56,2,7),
 (3,"Barometrix",68,2,3),
 (4,"Panoramix",79,2,1),
-(5,"Assurantourix",53,3,1),
+(5,"Assurancetourix",53,3,1),
 (6,"Zérozérosix",75,2,4),
 (7,"Astérix",35,4,1),
 (8,"Bellodalix",32,4,7),
@@ -58,14 +58,14 @@ VALUES
 -- INSERT TABLE POTION
 INSERT INTO potion (num_potion, lib_potion, formule, constituant_principal)
 VALUES 
-(1,"Potion Magique n°1","NULL","Gui"),
-(2,"Potion Magique n°2","4V3C2VA","Vin"),
-(3,"Potion Magique n°3","2C1B","Calva"),
+(1,"Potion magique n°1",NULL,"Gui"),
+(2,"Potion magique n°2","4V3C2VA","Vin"),
+(3,"Potion magique n°3","2C1B","Calva"),
 (4,"Potion Zen","NULL","Jus de Betterave"),
 (5,"Potion Anti Douleur","5C3J1T","Calva");
 
 -- INSERT TABLE FABRIQUER
-INSERT INTO fabriquer (num_potion, num_habitant)
+INSERT INTO fabriquer (num_potion, num_hab)
 VALUES 
 (1,4),
 (2,2),
@@ -97,7 +97,7 @@ VALUES
 
 
 -- INSERT TABLE ABSORBER
-INSERT INTO absorber(num_potion, date_a,num_habitant,quantite)
+INSERT INTO absorber(num_potion, date_a,num_hab,quantite)
 VALUES
 (1,'2052-02-18 00:00:00',7,3),
 (2,'2052-02-18 00:00:00',12,4),

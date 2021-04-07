@@ -31,7 +31,7 @@ ENGINE InnoDB;
 
 -- TABLE HABITANT
 CREATE TABLE IF NOT EXISTS habitant (
-num_habitant INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+num_hab INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
    nom VARCHAR(30),
     age INT,
     num_qualite INT,  
@@ -56,7 +56,7 @@ ENGINE InnoDB;
 -- TABLE CATEGORIE
 CREATE TABLE IF NOT EXISTS categorie (
 code_cat CHAR(3) PRIMARY KEY NOT NULL ,
-    nom_categ VARCHAR(30) ,  
+    nom_categ VARCHAR(50) ,  
     superficie INT,
     nb_points INT
 )
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS trophee (
     num_resserre INT,
     CONSTRAINT FOREIGN KEY (code_cat) REFERENCES categorie(code_cat),
     CONSTRAINT FOREIGN KEY (num_resserre) REFERENCES resserre(num_resserre),
-    CONSTRAINT FOREIGN KEY (num_preneur) REFERENCES habitant(num_habitant)
+    CONSTRAINT FOREIGN KEY (num_preneur) REFERENCES habitant(num_hab)
 )
 ENGINE InnoDB;
 
@@ -89,9 +89,9 @@ ENGINE InnoDB;
 -- TABLE FABRIQUER
 CREATE TABLE IF NOT EXISTS fabriquer (
 num_potion INT ,
-    num_habitant INT ,  
-    PRIMARY KEY (num_potion , num_habitant),
-    CONSTRAINT FOREIGN KEY (num_habitant) REFERENCES habitant(num_habitant),
+    num_hab INT ,  
+    PRIMARY KEY (num_potion , num_hab),
+    CONSTRAINT FOREIGN KEY (num_hab) REFERENCES habitant(num_hab),
     CONSTRAINT FOREIGN KEY (num_potion) REFERENCES potion(num_potion)
 )
 ENGINE InnoDB;
@@ -100,11 +100,11 @@ ENGINE InnoDB;
 -- TABLE ABSORBER
 CREATE TABLE IF NOT EXISTS absorber (
     num_potion INT ,
-    num_habitant INT ,  
+    num_hab INT ,  
     date_a DATETIME,
     quantite INT,
-    PRIMARY KEY AUTO_INCREMENT(num_potion , num_habitant,date_a),
-    CONSTRAINT FOREIGN KEY (num_habitant) REFERENCES habitant(num_habitant),
+    PRIMARY KEY AUTO_INCREMENT(num_potion , num_hab,date_a),
+    CONSTRAINT FOREIGN KEY (num_hab) REFERENCES habitant(num_hab),
     CONSTRAINT FOREIGN KEY (num_potion) REFERENCES potion(num_potion)
 )
 ENGINE InnoDB;

@@ -37,7 +37,7 @@ WHERE nom LIKE "a%r%";
 /*------------------------------------------------------
 \                     REQUETE => 6                     \
 --------------------------------------------------------*/
-SELECT a.num_habitant 
+SELECT a.num_hab 
 FROM absorber a
 WHERE num_potion IN(1,3,4);
 
@@ -60,7 +60,7 @@ WHERE v.nom_village ="Aquilona";
 --------------------------------------------------------*/
 SELECT nom 
 FROM habitant h 
-INNER JOIN trophee t ON t.num_preneur = h.num_habitant 
+INNER JOIN trophee t ON t.num_preneur = h.num_hab 
 INNER JOIN categorie c ON c.code_cat = t.code_cat 
 WHERE c.nom_categ = "Bouclier de Légat"; 
 
@@ -69,7 +69,7 @@ WHERE c.nom_categ = "Bouclier de Légat";
 --------------------------------------------------------*/
 SELECT h.nom 
 FROM habitant h 
-INNER JOIN trophee t ON t.num_preneur = h.num_habitant 
+INNER JOIN trophee t ON t.num_preneur = h.num_hab 
 INNER JOIN categorie c ON c.code_cat = t.code_cat 
 WHERE c.nom_categ = "Bouclier de Légat"; 
 
@@ -79,31 +79,31 @@ WHERE c.nom_categ = "Bouclier de Légat";
 SELECT p.lib_potion 
 FROM potion p
 INNER JOIN absorber a ON a.num_potion = p.num_potion
-INNER JOIN habitant h ON a.num_habitant = h.num_habitant
+INNER JOIN habitant h ON a.num_hab = h.num_hab
 WHERE h.nom = "Homéopatix"
 GROUP BY p.lib_potion;
 
 /*------------------------------------------------------
 \                    REQUETE => 12                     \
 --------------------------------------------------------*/
-SELECT a.num_habitant , ha.nom
+SELECT a.num_hab , ha.nom
 FROM absorber a
 INNER JOIN fabriquer f ON a.num_potion = f.num_potion
-INNER JOIN habitant h ON h.num_habitant = f.num_habitant
-INNER JOIN habitant ha ON ha.num_habitant = a.num_habitant
-WHERE h.num_habitant = 3
-GROUP BY a.num_habitant;
+INNER JOIN habitant h ON h.num_hab = f.num_hab
+INNER JOIN habitant ha ON ha.num_hab = a.num_hab
+WHERE h.num_hab = 3
+GROUP BY a.num_hab;
 
 /*------------------------------------------------------
 \                    REQUETE => 13                     \
 --------------------------------------------------------*/
-SELECT a.num_habitant , ha.nom
+SELECT a.num_hab , ha.nom
 FROM absorber a
 INNER JOIN fabriquer f ON a.num_potion = f.num_potion
-INNER JOIN habitant h ON h.num_habitant = f.num_habitant
-INNER JOIN habitant ha ON ha.num_habitant = a.num_habitant
+INNER JOIN habitant h ON h.num_hab = f.num_hab
+INNER JOIN habitant ha ON ha.num_hab = a.num_hab
 WHERE h.nom = "Amnésix"
-GROUP BY a.num_habitant;
+GROUP BY a.num_hab;
 
 /*------------------------------------------------------
 \                    REQUETE => 14                     \
@@ -117,7 +117,7 @@ WHERE num_qualite IS NULL;
 --------------------------------------------------------*/
 SELECT h.nom , p.lib_potion
 FROM habitant h
-INNER JOIN absorber a ON a.num_habitant = h.num_habitant
+INNER JOIN absorber a ON a.num_hab = h.num_hab
 INNER JOIN potion p ON p.num_potion = a.num_potion
 WHERE p.num_potion = 1 
 AND (a.date_a >= "2052-02-01 00:00:00" AND a.date_a <= "2052-02-29 00:00:00");
@@ -140,7 +140,7 @@ ORDER BY r.superficie DESC;
 /*------------------------------------------------------
 \                    REQUETE => 18                     \
 --------------------------------------------------------*/
-SELECT COUNT(num_habitant) nb_habitant 
+SELECT COUNT(num_hab) nb_habitant 
 FROM habitant h
 WHERE h.num_village = 5;
 
@@ -149,7 +149,7 @@ WHERE h.num_village = 5;
 --------------------------------------------------------*/
 SELECT h.nom, SUM(c.nb_points)
 FROM trophee
-INNER JOIN habitant h ON trophee.num_preneur = h.num_habitant
+INNER JOIN habitant h ON trophee.num_preneur = h.num_hab
 INNER JOIN categorie c ON trophee.code_cat = c.code_cat
 WHERE h.nom = "Goudurix"
 GROUP BY h.nom;
@@ -181,7 +181,7 @@ LIMIT 1;
 /*------------------------------------------------------
 \                    REQUETE => 23                     \
 --------------------------------------------------------*/
-SELECT v.nom_village , COUNT(h.num_habitant)
+SELECT v.nom_village , COUNT(h.num_hab)
 FROM village v
 INNER JOIN habitant h ON v.num_village = h.num_village
 GROUP BY v.nom_village;
@@ -190,7 +190,7 @@ GROUP BY v.nom_village;
 --------------------------------------------------------*/ 
 SELECT h.nom , COUNT(t.num_trophee)
 FROM trophee t
-INNER JOIN habitant h ON t.num_preneur = h.num_habitant
+INNER JOIN habitant h ON t.num_preneur = h.num_hab
 GROUP BY h.nom;
 
 /*------------------------------------------------------
@@ -208,7 +208,7 @@ GROUP BY v.num_province;
 SELECT h.nom, SUM(a.quantite)
 FROM absorber a 
 INNER JOIN potion p ON a.num_potion = p.num_potion
-INNER JOIN habitant h ON a.num_habitant = h.num_habitant
+INNER JOIN habitant h ON a.num_hab = h.num_hab
 GROUP BY h.nom;
 
 /*------------------------------------------------------
@@ -217,7 +217,7 @@ GROUP BY h.nom;
 SELECT h.nom,a.quantite, p.lib_potion
 FROM absorber a 
 INNER JOIN potion p ON a.num_potion = p.num_potion
-INNER JOIN habitant h ON a.num_habitant = h.num_habitant
+INNER JOIN habitant h ON a.num_hab = h.num_hab
 WHERE (p.lib_potion = "Potion Zen")AND(a.quantite > 2 );
 
 /*------------------------------------------------------
@@ -240,11 +240,11 @@ LIMIT 1;
 --------------------------------------------------------*/  
 SELECT h.nom,COUNT(t.num_trophee) AS nb_trophee
 FROM trophee t
-INNER JOIN habitant h ON t.num_preneur = h.num_habitant
+INNER JOIN habitant h ON t.num_preneur = h.num_hab
 GROUP BY h.nom 
 HAVING nb_trophee > (
 SELECT COUNT(t.num_trophee) AS nb_trophee
 FROM trophee t
-INNER JOIN habitant h ON t.num_preneur = h.num_habitant
+INNER JOIN habitant h ON t.num_preneur = h.num_hab
     WHERE h.nom = "Obélix"
 );

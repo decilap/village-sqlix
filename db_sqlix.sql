@@ -24,12 +24,12 @@ DROP TABLE IF EXISTS `absorber`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `absorber` (
   `num_potion` int NOT NULL,
-  `num_habitant` int NOT NULL,
+  `num_hab` int NOT NULL,
   `date_a` datetime NOT NULL,
   `quantite` int DEFAULT NULL,
-  PRIMARY KEY (`num_potion`,`num_habitant`,`date_a`),
-  KEY `num_habitant` (`num_habitant`),
-  CONSTRAINT `absorber_ibfk_1` FOREIGN KEY (`num_habitant`) REFERENCES `habitant` (`num_habitant`),
+  PRIMARY KEY (`num_potion`,`num_hab`,`date_a`),
+  KEY `num_hab` (`num_hab`),
+  CONSTRAINT `absorber_ibfk_1` FOREIGN KEY (`num_hab`) REFERENCES `habitant` (`num_hab`),
   CONSTRAINT `absorber_ibfk_2` FOREIGN KEY (`num_potion`) REFERENCES `potion` (`num_potion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -116,10 +116,10 @@ DROP TABLE IF EXISTS `fabriquer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `fabriquer` (
   `num_potion` int NOT NULL,
-  `num_habitant` int NOT NULL,
-  PRIMARY KEY (`num_potion`,`num_habitant`),
-  KEY `num_habitant` (`num_habitant`),
-  CONSTRAINT `fabriquer_ibfk_1` FOREIGN KEY (`num_habitant`) REFERENCES `habitant` (`num_habitant`),
+  `num_hab` int NOT NULL,
+  PRIMARY KEY (`num_potion`,`num_hab`),
+  KEY `num_hab` (`num_hab`),
+  CONSTRAINT `fabriquer_ibfk_1` FOREIGN KEY (`num_hab`) REFERENCES `habitant` (`num_hab`),
   CONSTRAINT `fabriquer_ibfk_2` FOREIGN KEY (`num_potion`) REFERENCES `potion` (`num_potion`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -148,12 +148,12 @@ DROP TABLE IF EXISTS `habitant`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `habitant` (
-  `num_habitant` int NOT NULL AUTO_INCREMENT,
+  `num_hab` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `age` int DEFAULT NULL,
   `num_qualite` int DEFAULT NULL,
   `num_village` int DEFAULT NULL,
-  PRIMARY KEY (`num_habitant`),
+  PRIMARY KEY (`num_hab`),
   KEY `num_qualite` (`num_qualite`),
   KEY `num_village` (`num_village`),
   CONSTRAINT `habitant_ibfk_1` FOREIGN KEY (`num_qualite`) REFERENCES `qualite` (`num_qualite`),
@@ -330,7 +330,7 @@ CREATE TABLE `trophee` (
   KEY `num_preneur` (`num_preneur`),
   CONSTRAINT `trophee_ibfk_1` FOREIGN KEY (`code_cat`) REFERENCES `categorie` (`code_cat`),
   CONSTRAINT `trophee_ibfk_2` FOREIGN KEY (`num_resserre`) REFERENCES `resserre` (`num_resserre`),
-  CONSTRAINT `trophee_ibfk_3` FOREIGN KEY (`num_preneur`) REFERENCES `habitant` (`num_habitant`)
+  CONSTRAINT `trophee_ibfk_3` FOREIGN KEY (`num_preneur`) REFERENCES `habitant` (`num_hab`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
